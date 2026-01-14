@@ -1,0 +1,180 @@
+:root {
+  --footer-bg: #fafafa;
+  --footer-dark: #111;
+  --footer-muted: #6c6c6c;
+  --brand-red: #D62828;
+  --brand-red-600: #b91e1e;
+  --footer-radius: 12px;
+  --footer-gap: 1.25rem;
+}
+
+/* Footer base */
+.footer {
+  background: linear-gradient(180deg, var(--footer-bg), #fff);
+  border-top: 1px solid rgba(0,0,0,0.04);
+  padding: 3.25rem 0;
+  color: var(--footer-dark);
+  font-size: 0.95rem;
+}
+
+/* Footer grid */
+.footer .footer-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--footer-gap);
+}
+@media (max-width: 900px) {
+  .footer .footer-row { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 576px) {
+  .footer .footer-row { grid-template-columns: 1fr; }
+}
+
+/* Column titles */
+.footer h5 {
+  font-size: 1rem;
+  margin-bottom: 0.75rem;
+  color: var(--brand-red-600);
+  letter-spacing: -0.01em;
+}
+
+/* About */
+.footer .about p {
+  color: var(--footer-muted);
+  margin-bottom: 0.5rem;
+}
+
+/* Links list */
+.footer .links,
+.footer .contact-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.footer .links li,
+.footer .contact-list li {
+  margin-bottom: 0.5rem;
+}
+.footer .links a {
+  color: var(--footer-muted);
+  text-decoration: none;
+  transition: color 180ms ease, transform 180ms ease;
+}
+.footer .links a:hover,
+.footer .links a:focus {
+  color: var(--brand-red);
+  transform: translateX(4px);
+}
+
+/* Newsletter */
+.footer .newsletter {
+  display:flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+.footer .newsletter input[type="email"] {
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 8px;
+  padding: 0.55rem 0.75rem;
+  flex: 1;
+  transition: box-shadow 180ms ease, border-color 180ms ease;
+}
+.footer .newsletter input[type="email"]:focus {
+  box-shadow: 0 6px 20px rgba(214,40,40,0.06);
+  border-color: var(--brand-red);
+  outline: none;
+}
+.footer .newsletter button {
+  background: var(--brand-red);
+  color: #fff;
+  border: none;
+  padding: 0.52rem 0.9rem;
+  border-radius: 8px;
+  box-shadow: 0 6px 18px rgba(214,40,40,0.10);
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+.footer .newsletter button:hover,
+.footer .newsletter button:focus {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 30px rgba(214,40,40,0.14);
+}
+
+/* Contact list */
+.footer .contact-list li .ci {
+  display:inline-block;
+  width: 30px;
+  color: var(--brand-red);
+}
+.footer .contact-list li { color: var(--footer-muted); }
+
+/* Social icons */
+.footer .social {
+  display:flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+.footer .social a {
+  width:40px; height:40px; display:inline-flex; align-items:center; justify-content:center;
+  border-radius: 10px;
+  background: rgba(0,0,0,0.03);
+  color: var(--footer-muted);
+  text-decoration: none;
+  transition: transform 160ms ease, background 160ms ease, color 160ms ease;
+}
+.footer .social a:hover, .footer .social a:focus {
+  transform: translateY(-4px);
+  background: linear-gradient(90deg, var(--brand-red), var(--brand-red-600));
+  color: #fff;
+  box-shadow: 0 12px 30px rgba(214,40,40,0.12);
+}
+
+/* Bottom bar */
+.footer .bottom {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap: 1rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(0,0,0,0.04);
+  margin-top: 1.5rem;
+  color: var(--footer-muted);
+  font-size: 0.9rem;
+}
+@media (max-width: 576px) {
+  .footer .bottom { flex-direction: column; align-items:flex-start; gap: 0.5rem; }
+}
+
+/* Back to top */
+#backToTop {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 1200;
+  width:48px;
+  height:48px;
+  border-radius: 12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background: linear-gradient(180deg, #fff, #fff);
+  color: var(--brand-red);
+  border: 1px solid rgba(0,0,0,0.06);
+  box-shadow: 0 10px 30px rgba(16,24,40,0.08);
+  opacity: 0;
+  transform: translateY(10px) scale(0.98);
+  transition: opacity 260ms ease, transform 260ms cubic-bezier(.2,.9,.2,1);
+  pointer-events: none;
+}
+#backToTop.show {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+#backToTop:focus { outline: none; box-shadow: 0 6px 20px rgba(214,40,40,0.10); }
+
+/* small tweak for links in footer */
+.footer a.footer-link { color: var(--footer-muted); text-decoration: none; }
+.footer a.footer-link:hover { color: var(--brand-red); text-decoration: underline; }
+
+/* Accessibility */
+.footer .sr-only { position: absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0; }

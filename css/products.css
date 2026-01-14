@@ -1,0 +1,96 @@
+/* products.css - styles specific to products page (load after styles.css) */
+
+/* Base product card */
+.product-card {
+  overflow: hidden;
+  position: relative;
+  border-radius: 14px;
+  transition: transform 240ms cubic-bezier(.2,.9,.2,1), box-shadow 240ms ease;
+  will-change: transform;
+  box-shadow: var(--card-shadow);
+}
+
+/* Image */
+.product-card .card-img-top {
+  height: 240px;
+  object-fit: cover;
+  transition: transform 360ms cubic-bezier(.2,.9,.2,1), filter 360ms ease;
+}
+
+/* Gentle hover: subtle lift and small image scale */
+.product-card:hover,
+.product-card:focus-within {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 36px rgba(16,24,40,0.08);
+}
+.product-card:hover .card-img-top,
+.product-card:focus-within .card-img-top {
+  transform: scale(1.03);
+  filter: saturate(1.03);
+}
+
+/* Product ribbon (kept subtle) */
+.product-ribbon {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: linear-gradient(90deg, var(--brand-red), var(--brand-red-700));
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-weight:600;
+  font-size:0.85rem;
+  box-shadow: 0 8px 20px rgba(214,40,40,0.12);
+  opacity: 0.98;
+  transform: translateY(0);
+  transition: opacity 220ms ease, transform 220ms ease;
+}
+
+/* Card body spacing */
+.product-card .card-body { padding: 1.25rem; }
+
+/* CTA width */
+.btn-detail { min-width:110px; }
+
+/* product modal image style */
+#productModalImage { max-height: 420px; object-fit: cover; width:100%; border-radius: 8px; }
+
+/* spec list */
+#productModalSpecs li { margin-bottom: 6px; }
+
+/* subtle focus style for keyboard users */
+.product-card:focus { outline: none; }
+.product-card:focus-visible {
+  box-shadow: 0 0 0 4px rgba(214,40,40,0.08), 0 16px 36px rgba(16,24,40,0.08);
+  transform: translateY(-6px);
+}
+
+/* Buttons subtle hover */
+.product-card .btn {
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+.product-card:hover .btn,
+.product-card:focus-within .btn {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(16,24,40,0.06);
+}
+
+/* No-results placeholder */
+.no-products {
+  text-align:center;
+  padding: 48px 12px;
+  color: var(--muted);
+}
+
+/* Mobile adjustments */
+@media (max-width:576px) {
+  .product-card { transform: none !important; box-shadow: var(--card-shadow); }
+  .product-card .card-img-top { height: 160px; transform: none !important; }
+}
+
+/* Accessibility: respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .product-card, .product-card .card-img-top, .product-ribbon { transition: none !important; transform: none !important; }
+}
+
+/* End of products.css */
