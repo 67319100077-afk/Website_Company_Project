@@ -53,29 +53,57 @@ body {
 
 /* NAVBAR */
 .navbar {
-  background: rgba(255,255,255,0.94);
+  background: rgba(255,255,255,0.95);
   backdrop-filter: blur(6px) saturate(110%);
-  border-bottom: 1px solid rgba(16,24,40,0.04);
-  padding: .6rem 0;
+  border-bottom: none;              /* เอาเส้นเดิมออก */
+  padding: .35rem 0;                /* เดิม .6rem → เล็กลง */
 }
+
 .navbar-brand { display: flex; align-items: center; gap: .6rem; }
 
 /* two brand options supported:
    - <img class="navbar-logo"> (index.html)
    - .brand-mark element (products.html)
 */
-.navbar-logo { height:44px; width:auto; transition: transform var(--trans-fast) ease; }
+.navbar-logo {
+  height: 52px;         /* เพิ่มขนาดโลโก้บนเดสก์ท็อป */
+  width: auto;
+  transition: transform var(--trans-fast) ease;
+  display: block;
+}
 .navbar-brand:hover .navbar-logo,
 .navbar-brand:focus-within .navbar-logo { transform: translateY(-2px); }
 
-.brand-mark{
-  width:48px;
-  height:48px;
-  background: linear-gradient(135deg, var(--brand-red), var(--brand-red-700));
-  border-radius:8px;
-  box-shadow: 0 6px 18px rgba(214,40,40,0.10);
+.brand-mark {
+  width: 56px;
+  height: 56px;
+  border-radius: 10px;
+  box-shadow: 0 8px 22px rgba(214,40,40,0.10);
+  transition: transform var(--trans-fast) ease, box-shadow var(--trans-fast) ease;
 }
+/* ปรับช่องว่างระหว่างโลโก้กับข้อความแบรนด์เล็กน้อย */
+.navbar-brand { gap: 0.75rem; }
 
+/* เล็กลงบนมือถือ ให้อยู่ในสัดส่วนที่เหมาะสม */
+@media (max-width: 576px) {
+  .navbar-logo {
+    height: 40px;
+  }
+}
+/* เส้นแดงใต้ Navbar */
+.navbar::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    var(--brand-red),
+    var(--brand-red-700)
+  );
+}
 /* NAV LINKS */
 .navbar .nav-link {
   color: var(--muted);
@@ -103,6 +131,11 @@ body {
 .navbar .nav-link.active::after,
 .navbar .nav-link:hover::after,
 .navbar .nav-link:focus::after { transform: translateX(-50%) scaleX(1); }
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1030;   /* สูงกว่า banner / carousel */
+}
 
 /* BUTTONS (global) */
 .btn {
@@ -151,13 +184,16 @@ body {
 }
 
 /* HERO / CAROUSEL */
+#heroCarousel,
+#heroCarousel .carousel-inner,
+#heroCarousel .carousel-item {
+  height: 90vh;   /* เดิม 100vh */
+}
+
 .hero-img {
   width: 100%;
-  height: 56vh;
-  min-height: 320px;
+  height: 90vh;   /* เดิม 100vh */
   object-fit: cover;
-  display: block;
-  border-radius: 0;
 }
 
 /* caption as translucent card */
@@ -190,9 +226,12 @@ body {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(0,0,0,0.12), rgba(0,0,0,0.34));
-  pointer-events: none;
-  z-index: 2;
+  background: linear-gradient(
+    180deg,
+    rgba(0,0,0,0.25),
+    rgba(0,0,0,0.55)
+  );
+  z-index: 1;
 }
 .carousel-indicators [data-bs-target] {
   width: 12px;
@@ -200,6 +239,42 @@ body {
   border-radius: 50%;
   margin: 0 .25rem;
 }
+.hero-caption {
+  position: absolute;
+  z-index: 2;
+  left: 6%;
+  bottom: 18%;
+  max-width: 720px;
+  padding: 1.25rem 1.5rem;
+  background: none;            /* เอากล่องขาวออก */
+  backdrop-filter: none;
+  box-shadow: none;
+  color: #fff;
+}
+.hero-caption h2 {
+  font-size: clamp(1.8rem, 3vw, 3rem);
+  font-weight: 800;
+} 
+.hero-caption p.lead {
+  color: rgba(255,255,255,0.95);
+}
+@media (max-width: 768px) {
+  #heroCarousel,
+  .hero-img {
+    height: 85vh;
+  }
+
+  .hero-caption {
+    left: 5%;
+    right: 5%;
+    bottom: 12%;
+  }
+
+  .hero-caption .btn {
+    width: 100%;
+  }
+}
+
 
 /* ANNOUNCEMENT MODAL */
 .modal-backdrop.show {

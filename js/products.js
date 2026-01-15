@@ -1,148 +1,169 @@
-// products.js - small script for products page
-document.addEventListener('DOMContentLoaded', () => {
-  const grid = document.getElementById('productsGrid');
-  if (!grid) return; // only run on products page
+// products.js
+// Handles product detail modal population and simple related-products logic
 
-  const filterBtns = Array.from(document.querySelectorAll('[data-filter]'));
-  const searchInput = document.getElementById('productSearch');
-  const clearSearchBtn = document.getElementById('clearProductSearch');
-  const cards = Array.from(grid.querySelectorAll('[data-category]'));
-
-  // Filter function
-  function applyFilter(category) {
-    filterBtns.forEach(b => b.classList.toggle('active', b.getAttribute('data-filter') === category));
-    let shown = 0;
-    cards.forEach(cardCol => {
-      const cat = cardCol.getAttribute('data-category') || 'all';
-      const matches = (category === 'all') || (cat === category);
-      cardCol.style.display = matches ? '' : 'none';
-      if (matches) shown++;
-    });
-    showNoProductsIfNeeded(shown);
-  }
-
-  // Search function (client-side)
-  function applySearch(q) {
-    q = (q||'').trim().toLowerCase();
-    let shown = 0;
-    cards.forEach(cardCol => {
-      const title = (cardCol.getAttribute('data-title') || '').toLowerCase();
-      const extra = (cardCol.getAttribute('data-search') || '').toLowerCase();
-      const categoryVisible = cardCol.style.display !== 'none';
-      const match = q === '' || title.includes(q) || extra.includes(q);
-      cardCol.style.display = match && categoryVisible ? '' : 'none';
-      if (match && categoryVisible) shown++;
-    });
-    showNoProductsIfNeeded(shown);
-  }
-
-  function showNoProductsIfNeeded(shownCount) {
-    const existing = document.querySelector('.no-products');
-    if (shownCount === 0) {
-      if (!existing) {
-        const el = document.createElement('div');
-        el.className = 'no-products col-12';
-        el.innerHTML = '<p class="mb-0"><strong>ไม่พบสินค้า</strong><br><small class="text-muted">ลองเปลี่ยนคำค้นหาหรือหมวดหมู่</small></p>';
-        grid.appendChild(el);
-      }
-    } else {
-      if (existing) existing.remove();
-    }
-  }
-
-  // Bind filter buttons
-  filterBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const cat = btn.getAttribute('data-filter');
-      applyFilter(cat);
-      // clear search when switching filter
-      if (searchInput) {
-        searchInput.value = '';
-      }
-    });
-  });
-
-  // Bind search
-  if (searchInput) {
-    searchInput.addEventListener('input', (e) => {
-      // first ensure category filter applied (active btn)
-      const activeBtn = filterBtns.find(b => b.classList.contains('active'));
-      const category = activeBtn ? activeBtn.getAttribute('data-filter') : 'all';
-      applyFilter(category);
-      applySearch(e.target.value);
-    });
-  }
-  if (clearSearchBtn) {
-    clearSearchBtn.addEventListener('click', () => {
-      if (searchInput) searchInput.value = '';
-      const activeBtn = filterBtns.find(b => b.classList.contains('active'));
-      applyFilter(activeBtn ? activeBtn.getAttribute('data-filter') : 'all');
-    });
-  }
-
-  // Product detail modal
-  const productModalEl = document.getElementById('productModal');
-  const bsProductModal = productModalEl ? new bootstrap.Modal(productModalEl, {}) : null;
+document.addEventListener('DOMContentLoaded', function () {
+  const modalEl = document.getElementById('productModal');
   const modalTitle = document.getElementById('productModalTitle');
   const modalImage = document.getElementById('productModalImage');
   const modalDesc = document.getElementById('productModalDesc');
   const modalSpecs = document.getElementById('productModalSpecs');
-  const downloadSpec = document.getElementById('downloadSpec');
+  const productRelated = document.getElementById('productRelated');
+  const productQuoteBtn = document.getElementById('productQuoteBtn');
+  const bsModal = modalEl ? new bootstrap.Modal(modalEl, { keyboard: true }) : null;
 
-  // attach event to detail buttons
-  grid.querySelectorAll('.btn-detail').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      const t = e.currentTarget;
-      const title = t.dataset.title || '';
-      const image = t.dataset.image || '';
-      const desc = t.dataset.desc || '';
-      const specRaw = t.dataset.spec || '{}';
-      let specs = {};
-      try { specs = JSON.parse(specRaw); } catch(ignore){ specs = { note: specRaw }; }
-
-      if (modalTitle) modalTitle.textContent = title;
-      if (modalImage) {
-        modalImage.src = image;
-        modalImage.alt = title;
-      }
-      if (modalDesc) modalDesc.innerHTML = desc;
-      if (modalSpecs) {
-        modalSpecs.innerHTML = '';
-        Object.entries(specs).forEach(([k, v]) => {
-          const li = document.createElement('li');
-          const key = k.charAt(0).toUpperCase() + k.slice(1);
-          li.innerHTML = `<strong>${escapeHtml(key)}:</strong> ${escapeHtml(String(v))}`;
-          modalSpecs.appendChild(li);
-        });
-      }
-      if (downloadSpec) {
-        // point to an example PDF; update to real spec file per product if available
-        downloadSpec.href = 'assets/specs/sample-product-spec.pdf';
-      }
-      if (bsProductModal) bsProductModal.show();
-    });
-  });
-
-  // small helper
-  function escapeHtml(s='') {
-    return String(s)
-      .replaceAll('&','&amp;')
-      .replaceAll('<','&lt;')
-      .replaceAll('>','&gt;')
-      .replaceAll('"','&quot;')
-      .replaceAll("'",'&#039;');
+  // Utility: safely parse JSON or return object with raw string
+  function safeParseSpec(specStr) {
+    try {
+      const parsed = typeof specStr === 'string' ? JSON.parse(specStr) : specStr;
+      return parsed && typeof parsed === 'object' ? parsed : { info: String(specStr) };
+    } catch (e) {
+      return { info: String(specStr) };
+    }
   }
 
-  // init: set default filter = all
-  applyFilter('all');
+  // Collect product items for related lookup
+  const productCards = Array.from(document.querySelectorAll('#productsGrid > [data-category]'));
 
-  // keyboard accessibility: open modal on Enter when card focused
-  grid.querySelectorAll('.product-card').forEach(card => {
-    card.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
+  // Open modal and populate
+  function openProductModal(data) {
+    modalTitle.textContent = data.title || 'รายละเอียดสินค้า';
+    modalImage.src = data.image || '';
+    modalImage.alt = data.title || 'product image';
+    modalDesc.textContent = data.desc || '';
+    // Specs
+    modalSpecs.innerHTML = '';
+    const specs = safeParseSpec(data.spec);
+    if (specs && typeof specs === 'object') {
+      for (const key of Object.keys(specs)) {
+        const li = document.createElement('li');
+        li.textContent = `${key}: ${specs[key]}`;
+        modalSpecs.appendChild(li);
+      }
+    } else {
+      const li = document.createElement('li');
+      li.textContent = String(specs);
+      modalSpecs.appendChild(li);
+    }
+
+    // Quote button: keep linking to contact with prefilled query (optional)
+    if (productQuoteBtn) {
+      // include product title in mailto or contact query param (simple)
+      productQuoteBtn.href = `contact.html?product=${encodeURIComponent(data.title || '')}`;
+    }
+
+    // Show related products (same category, exclude itself)
+    productRelated.innerHTML = '';
+    if (data.category) {
+      const related = productCards
+        .filter(card => card.dataset.category === data.category && card.dataset.title !== data.title)
+        .slice(0, 3);
+
+      if (related.length === 0) {
+        productRelated.innerHTML = '<div class="smaller-text text-muted">ไม่มีสินค้าที่เกี่ยวข้อง</div>';
+      } else {
+        related.forEach(rel => {
+          const relTitle = rel.dataset.title || '';
+          const relImage = rel.querySelector('img')?.getAttribute('src') || '';
+          const item = document.createElement('button');
+          item.type = 'button';
+          item.className = 'product-related-item btn';
+          item.setAttribute('aria-label', `ดู ${relTitle}`);
+          item.innerHTML = `
+            <img src="${relImage}" alt="${relTitle}">
+            <div class="text-truncate">${relTitle}</div>
+          `;
+          // clicking a related item populates modal with that product's data
+          item.addEventListener('click', function () {
+            const newData = {
+              title: rel.dataset.title,
+              image: rel.dataset.image || relImage,
+              desc: rel.dataset.desc || '',
+              spec: rel.dataset.spec || '{}',
+              category: rel.dataset.category || ''
+            };
+            openProductModal(newData);
+            // keep modal open (refresh content)
+          });
+          productRelated.appendChild(item);
+        });
+      }
+    }
+
+    // Show modal
+    if (bsModal) bsModal.show();
+  }
+
+  // Attach click handlers to detail buttons
+  document.querySelectorAll('.btn-detail').forEach(btn => {
+    btn.addEventListener('click', function (e) {
+      const dataset = btn.dataset || {};
+      const data = {
+        title: dataset.title || btn.closest('[data-title]')?.dataset.title || '',
+        image: dataset.image || btn.closest('[data-image]')?.dataset.image || '',
+        desc: dataset.desc || '',
+        spec: dataset.spec || dataset.specs || '{}',
+        category: dataset.category || btn.closest('[data-category]')?.dataset.category || ''
+      };
+      openProductModal(data);
+    });
+  });
+
+  // Also allow opening modal when pressing Enter on the card (accessibility)
+  document.querySelectorAll('.product-card').forEach(card => {
+    card.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') {
         const btn = card.querySelector('.btn-detail');
-        if (btn) btn.click();
+        if (btn) {
+          e.preventDefault();
+          btn.click();
+        }
       }
     });
   });
+
+  // Optional: Filtering/search (basic, non-intrusive)
+  const filterButtons = document.querySelectorAll('[data-filter]');
+  filterButtons.forEach(btn => {
+    btn.addEventListener('click', function () {
+      const filter = btn.dataset.filter;
+      filterButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      document.querySelectorAll('#productsGrid > [data-category]').forEach(col => {
+        if (filter === 'all' || col.dataset.category === filter) {
+          col.style.display = '';
+        } else {
+          col.style.display = 'none';
+        }
+      });
+    });
+  });
+
+  const searchInput = document.getElementById('productSearch');
+  const clearBtn = document.getElementById('clearProductSearch');
+  if (searchInput) {
+    let debounceTimer = null;
+    searchInput.addEventListener('input', function () {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(() => {
+        const q = (searchInput.value || '').toLowerCase().trim();
+        document.querySelectorAll('#productsGrid > [data-title]').forEach(col => {
+          const title = (col.dataset.title || '').toLowerCase();
+          const terms = (col.dataset.search || '').toLowerCase();
+          if (!q || title.includes(q) || terms.includes(q)) {
+            col.style.display = '';
+          } else {
+            col.style.display = 'none';
+          }
+        });
+      }, 180);
+    });
+  }
+  if (clearBtn) {
+    clearBtn.addEventListener('click', function () {
+      if (searchInput) searchInput.value = '';
+      // trigger input event
+      searchInput?.dispatchEvent(new Event('input'));
+    });
+  }
 });

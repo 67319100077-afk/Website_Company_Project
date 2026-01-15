@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>สินค้า — โรงงานผลิตอาหารสัตว์ ตัวอย่าง จำกัด</title>
+  <title>Nutrix Public Company Limited</title>
   <meta name="description" content="รายละเอียดสินค้าและบริการ OEM/ODM โรงงานผลิตอาหารสัตว์สำหรับสุนัขและแมว" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
@@ -15,9 +15,8 @@
 <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-3">
     <div class="container">
-      <!-- วางใน <nav> แทนแบรนด์เดิม -->
       <a class="navbar-brand d-flex align-items-center gap-2" href="/index.html" aria-label="โรงงานผลิตอาหารสัตว์ ตัวอย่าง จำกัด">
-        <img src="/assets/images/logo_Nutrix.svg"
+        <img src="/assets/images/logo-nutrix.png"
             alt="โรงงานผลิตอาหารสัตว์ ตัวอย่าง จำกัด"
             class="navbar-logo"
             width="48" height="48">
@@ -66,11 +65,11 @@
 
       <!-- product grid -->
       <section id="productsGrid" class="row g-4">
-        <!-- cards (same as before) -->
+        <!-- Product 1 -->
         <div class="col-sm-6 col-lg-4" data-category="dog" data-title="สูตรครบถ้วน (Adult) รุ่น A" data-search="สูตรครบถ้วน Adult โปรตีน">
-          <div class="card product-card h-100 border-0 shadow-sm" data-tilt tabindex="0">
-            <div class="position-relative">
-              <img src="assets/images/Dog_Food1.png" class="card-img-top" alt="อาหารสุนัข สูตรครบถ้วน" loading="lazy">
+          <div class="card product-card h-100 border-0" tabindex="0">
+            <div class="position-relative news-card-overlay">
+              <img src="assets/images/product-dog-01.jpg" class="card-img-top" alt="อาหารสุนัข สูตรครบถ้วน" loading="lazy">
               <div class="product-ribbon">ยอดนิยม</div>
             </div>
             <div class="card-body d-flex flex-column">
@@ -78,14 +77,15 @@
               <p class="text-muted small mb-2">สมดุลโปรตีนและวิตามิน เหมาะสำหรับสุนัขโต</p>
               <ul class="list-unstyled small text-muted mb-3">
                 <li>ขนาด: 1kg / 5kg / 20kg</li>
-                <li>โปรตีน: สูง 24%</li>
+                <li>โปรตีน: 24%</li>
               </ul>
               <div class="mt-auto d-flex justify-content-between align-items-center">
                 <button class="btn btn-sm btn-outline-danger btn-detail" type="button"
                   data-title="สูตรครบถ้วน (Adult) รุ่น A"
-                  data-image="assets/images/product_01.jpg"
+                  data-category="dog"
+                  data-image="assets/images/product-dog-01.jpg"
                   data-desc="อาหารสุนัขสูตรครบถ้วน เหมาะสำหรับสุนัขโต ดูแลสุขภาพทั่วไปและขนสวย. เหมาะกับทุกสายพันธุ์ที่ต้องการโภชนาการสมดุล."
-                  data-spec='{"protein":"24%","fat":"12%","fiber":"3%","sizes":"1kg/5kg/20kg"}'
+                  data-spec='{"โปรตีน":"24%","ไขมัน":"12%","ไฟเบอร์":"3%","ขนาด":"1kg/5kg/20kg"}'
                 >รายละเอียด</button>
                 <a class="btn btn-sm btn-primary" href="contact.html">ขอใบเสนอราคา</a>
               </div>
@@ -93,10 +93,184 @@
           </div>
         </div>
 
-        <!-- other cards omitted here for brevity (use your existing ones) -->
+        <!-- Product 2 -->
+        <div class="col-sm-6 col-lg-4" data-category="dog" data-title="สูตรลูกสุนัข (Puppy) รุ่น B" data-search="puppy ลูกสุนัข โปรตีน สูง">
+          <div class="card product-card h-100 border-0" tabindex="0">
+            <div class="position-relative news-card-overlay">
+              <img src="assets/images/product-dog-02.jpg" class="card-img-top" alt="อาหารลูกสุนัข" loading="lazy">
+              <div class="product-ribbon">ใหม่</div>
+            </div>
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title mb-1">สูตรลูกสุนัข (Puppy) รุ่น B</h5>
+              <p class="text-muted small mb-2">ให้การเจริญเติบโตและพัฒนาการที่ดี</p>
+              <ul class="list-unstyled small text-muted mb-3">
+                <li>ขนาด: 1kg / 5kg</li>
+                <li>โปรตีน: 28%</li>
+              </ul>
+              <div class="mt-auto d-flex justify-content-between align-items-center">
+                <button class="btn btn-sm btn-outline-danger btn-detail" type="button"
+                  data-title="สูตรลูกสุนัข (Puppy) รุ่น B"
+                  data-category="dog"
+                  data-image="assets/images/product-dog-02.jpg"
+                  data-desc="พัฒนาสูตรสำหรับลูกสุนัข เสริมการเจริญเติบโตด้วยโปรตีนสูงและกรดอะมิโนที่เหมาะสม."
+                  data-spec='{"โปรตีน":"28%","ไขมัน":"14%","แคลเซียม":"1.2%","ขนาด":"1kg/5kg"}'
+                >รายละเอียด</button>
+                <a class="btn btn-sm btn-primary" href="contact.html">ขอใบเสนอราคา</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 3 -->
+        <div class="col-sm-6 col-lg-4" data-category="cat" data-title="อาหารแมวพรีเมียม รุ่น C" data-search="แมว พรีเมียม โปรตีน">
+          <div class="card product-card h-100 border-0" tabindex="0">
+            <div class="position-relative news-card-overlay">
+              <img src="assets/images/product-cat-01.jpg" class="card-img-top" alt="อาหารแมวพรีเมียม" loading="lazy">
+            </div>
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title mb-1">อาหารแมวพรีเมียม รุ่น C</h5>
+              <p class="text-muted small mb-2">สูตรสำหรับสุขภาพและขนสวย</p>
+              <ul class="list-unstyled small text-muted mb-3">
+                <li>ขนาด: 1kg / 3kg</li>
+                <li>โปรตีน: 30%</li>
+              </ul>
+              <div class="mt-auto d-flex justify-content-between align-items-center">
+                <button class="btn btn-sm btn-outline-danger btn-detail" type="button"
+                  data-title="อาหารแมวพรีเมียม รุ่น C"
+                  data-category="cat"
+                  data-image="assets/images/product-cat-01.jpg"
+                  data-desc="สูตรพรีเมียมสำหรับแมว ให้สารอาหารครบถ้วน ช่วยเรื่องขนและระบบย่อย"
+                  data-spec='{"โปรตีน":"30%","ไขมัน":"15%","วิตามิน":"ครบถ้วน","ขนาด":"1kg/3kg"}'
+                >รายละเอียด</button>
+                <a class="btn btn-sm btn-primary" href="contact.html">ขอใบเสนอราคา</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 4 -->
+        <div class="col-sm-6 col-lg-4" data-category="cat" data-title="สูตรลดกลิ่น รุ่น D" data-search="แมว กลิ่น รีดิวซ์ สูตร">
+          <div class="card product-card h-100 border-0" tabindex="0">
+            <div class="position-relative news-card-overlay">
+              <img src="assets/images/Cat_Food2.jpg" class="card-img-top" alt="อาหารแมวสูตรลดกลิ่น" loading="lazy">
+            </div>
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title mb-1">สูตรลดกลิ่น รุ่น D</h5>
+              <p class="text-muted small mb-2">ช่วยลดกลิ่นมูลและกลิ่นตัว</p>
+              <ul class="list-unstyled small text-muted mb-3">
+                <li>ขนาด: 1kg / 3kg</li>
+                <li>โปรตีน: 28%</li>
+              </ul>
+              <div class="mt-auto d-flex justify-content-between align-items-center">
+                <button class="btn btn-sm btn-outline-danger btn-detail" type="button"
+                  data-title="สูตรลดกลิ่น รุ่น D"
+                  data-category="cat"
+                  data-image="assets/images/Cat_Food2.jpg"
+                  data-desc="ผสมพรีไบโอติกส์และไฟเบอร์ ช่วยลดกลิ่นมูลและดูแลระบบย่อยอาหาร"
+                  data-spec='{"โปรตีน":"28%","ไฟเบอร์":"4%","ขนาด":"1kg/3kg"}'
+                >รายละเอียด</button>
+                <a class="btn btn-sm btn-primary" href="contact.html">ขอใบเสนอราคา</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 5 (Service) -->
+        <div class="col-sm-6 col-lg-4" data-category="service" data-title="บริการ OEM/ODM" data-search="oem odm บริการ ผลิต">
+          <div class="card product-card h-100 border-0" tabindex="0">
+            <div class="position-relative news-card-overlay">
+              <img src="assets/images/Service_product.png" class="card-img-top" alt="บริการ OEM/ODM" loading="lazy">
+            </div>
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title mb-1">บริการ OEM/ODM</h5>
+              <p class="text-muted small mb-2">พัฒนาสูตรและบรรจุภัณฑ์ครบวงจร</p>
+              <ul class="list-unstyled small text-muted mb-3">
+                <li>ขั้นต่ำการสั่งผลิต: ตามเงื่อนไข</li>
+                <li>บริการ: R&D, บรรจุภัณฑ์, ทดสอบ</li>
+              </ul>
+              <div class="mt-auto d-flex justify-content-between align-items-center">
+                <button class="btn btn-sm btn-outline-danger btn-detail" type="button"
+                  data-title="บริการ OEM/ODM"
+                  data-category="service"
+                  data-image="assets/images/Service_product.png"
+                  data-desc="บริการให้คำปรึกษา ออกแบบสูตร ผลิตและบรรจุภัณฑ์สำหรับแบรนด์ของคุณ พร้อมการทดสอบคุณภาพ"
+                  data-spec='{"ขั้นต่ำ":"ขึ้นกับสเปค","บริการ":"R&D/ออกแบบ/ผลิต/QC"}'
+                >รายละเอียด</button>
+                <a class="btn btn-sm btn-primary" href="contact.html">ขอใบเสนอราคา</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 6 -->
+        <div class="col-sm-6 col-lg-4" data-category="dog" data-title="สูตรสำหรับสุนัขแพ้ง่าย รุ่น E" data-search="สุนัข แพ้ง่าย สูตร hypoallergenic">
+          <div class="card product-card h-100 border-0" tabindex="0">
+            <div class="position-relative news-card-overlay">
+              <img src="assets/images/Dog_Food1.png" class="card-img-top" alt="อาหารสุนัขแพ้ง่าย" loading="lazy">
+            </div>
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title mb-1">สูตรสำหรับสุนัขแพ้ง่าย รุ่น E</h5>
+              <p class="text-muted small mb-2">วัตถุดิบน้อยชนิด เหมาะสำหรับสุนัขแพ้</p>
+              <ul class="list-unstyled small text-muted mb-3">
+                <li>ขนาด: 1kg / 5kg</li>
+                <li>โปรตีน: 22%</li>
+              </ul>
+              <div class="mt-auto d-flex justify-content-between align-items-center">
+                <button class="btn btn-sm btn-outline-danger btn-detail" type="button"
+                  data-title="สูตรสำหรับสุนัขแพ้ง่าย รุ่น E"
+                  data-category="dog"
+                  data-image="assets/images/Dog_Food1.png"
+                  data-desc="สูตร Hypoallergenic ใช้วัตถุดิบน้อยชนิด เพื่อลดการเกิดอาการแพ้"
+                  data-spec='{"โปรตีน":"22%","ไขมัน":"11%","วัตถุดิบน้อย":"จริง","ขนาด":"1kg/5kg"}'
+                >รายละเอียด</button>
+                <a class="btn btn-sm btn-primary" href="contact.html">ขอใบเสนอราคา</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </section>
     </div>
   </main>
+
+  <!-- Product detail modal -->
+  <div class="modal fade" id="productModal" tabindex="-1" aria-labelledby="productModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="productModalLabel">รายละเอียดสินค้า</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="ปิด"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row g-0">
+            <div class="col-md-6">
+              <img id="productModalImage" src="" alt="" class="img-fluid w-100 rounded-start" loading="lazy">
+            </div>
+            <div class="col-md-6">
+              <div class="p-3">
+                <h5 id="productModalTitle" class="fw-bold mb-2"></h5>
+                <p id="productModalDesc" class="small text-muted mb-3"></p>
+
+                <h6 class="mb-2">ข้อมูลทางโภชนาการ / สเปค</h6>
+                <ul id="productModalSpecs" class="list-unstyled small text-muted mb-3"></ul>
+
+                <div class="mb-3">
+                  <a id="productQuoteBtn" class="btn btn-primary me-2" href="contact.html">ขอใบเสนอราคา</a>
+                  <a id="productMoreBtn" class="btn btn-outline-secondary" href="products.html">ดูสินค้าที่เกี่ยวข้อง</a>
+                </div>
+
+                <h6 class="mb-2">สินค้าแนะนำที่เกี่ยวข้อง</h6>
+                <div id="productRelated" class="d-flex gap-2 flex-wrap"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">ปิด</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Footer (inserted) -->
   <footer class="footer" role="contentinfo" aria-label="Footer">
@@ -166,6 +340,6 @@
   <script src="js/products.js"></script>
   <!-- Footer JS -->
   <script src="js/footer.js"></script>
-  <script>document.getElementById('year-products').textContent = new Date().getFullYear();</script>
+  <script>document.getElementById('footerYear')?.textContent = new Date().getFullYear();</script>
 </body>
 </html>

@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
       "date": "2026-01-12",
       "summary": "โรงงานของเราขยายสายการผลิตด้วยสูตรพิเศษสำหรับลูกสุนัข เพื่อช่วยการเจริญเติบโตที่แข็งแรง",
       "content": "<p>เราได้พัฒนาสูตรใหม่ร่วมกับนักโภชนาการสัตว์ เพื่อให้โปรตีนและแร่ธาตุที่เหมาะสมสำหรับลูกสุนัขทุกสายพันธุ์ โดยมุ่งเน้นความปลอดภัยและความสามารถในการย่อยอาหาร</p><p>สนใจติดต่อฝ่ายขายเพื่อรับข้อมูลรายละเอียดและตัวอย่างฟรี</p>",
-      "image": "../assets/images/news-puppy.jpg",
+      "image": "../assets/images/news_data_03.jpg",
       "category": "ผลิตภัณฑ์",
       "sticky": false
     },
@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
       "date": "2026-01-05",
       "summary": "โรงงานผ่านการตรวจประเมินและได้รับการรับรองมาตรฐาน HACCP และ GMP เพื่อยืนยันคุณภาพการผลิต",
       "content": "<p>การรับรองนี้ช่วยยืนยันว่าโรงงานของเรามีกระบวนการควบคุมคุณภาพตั้งแต่การคัดเลือกวัตถุดิบจนถึงการจัดส่งสินค้า</p>",
-      "image": "../assets/images/news-cert.jpg",
+      "image": "../assets/images/news_data_02.jpg",
       "category": "ข่าวบริษัท",
       "sticky": true
     },
@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
       "date": "2025-12-20",
       "summary": "เรารับงาน OEM/ODM สำหรับแบรนด์อาหารสัตว์ พร้อมบริการออกแบบฉลากและบรรจุภัณฑ์",
       "content": "<p>หากคุณมีแบรนด์และต้องการผลิตอาหารสัตว์ตามสูตรของคุณ ทีม R&amp;D และฝ่ายออกแบบของเราพร้อมให้คำปรึกษาตั้งแต่การพัฒนาสูตรจนถึงการออกแบบบรรจุภัณฑ์</p>",
-      "image": "../assets/images/news-oem.jpg",
+      "image": "../assets/images/news_data_01.jpg",
       "category": "บริการ",
       "sticky": false
     }
@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // --- load news JSON with fallback ---
   function loadNewsJson() {
-    const path = isInNewsDir ? '../news-data.json' : 'news-data.json';
+    const path = isInNewsDir ? '../js/news-data.json' : 'js/news-data.json';
 
     if (window.location.protocol === 'file:') {
       console.info('Running from file:// - using fallback news data');
@@ -126,7 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const detailUrl = isInNewsDir ? `news-${safeId}.html` : `news/news-${safeId}.html`;
 
       col.innerHTML = `
-        <div class="card h-100 border-0 shadow-sm" data-tilt data-reveal>
+        <div class="card h-100 border-0 shadow-sm" data-reveal>
           <img src="${imageUrl}" alt="${escapeHtml(item.title)}" class="news-card-img w-100" loading="lazy">
           <div class="card-body">
             <h5 class="card-title">${escapeHtml(item.title)}</h5>
