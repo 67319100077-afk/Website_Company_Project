@@ -258,22 +258,51 @@ body {
 .hero-caption p.lead {
   color: rgba(255,255,255,0.95);
 }
+/* =========================
+   HERO / BANNER - MOBILE OPTIMIZE
+   ========================= */
 @media (max-width: 768px) {
+
+  /* ลดความสูง Banner */
   #heroCarousel,
+  #heroCarousel .carousel-inner,
+  #heroCarousel .carousel-item,
   .hero-img {
-    height: 85vh;
+    height: 60vh;
+    min-height: 320px;
   }
 
+  /* ขยับ caption ขึ้น ไม่ชนปุ่มเลื่อน */
   .hero-caption {
-    left: 5%;
-    right: 5%;
-    bottom: 12%;
+    left: 6%;
+    right: 6%;
+    bottom: 20%;
+    padding: 0;
   }
 
+  /* ปรับขนาดตัวอักษร */
+  .hero-caption h2 {
+    font-size: 1.4rem;
+    line-height: 1.3;
+  }
+
+  .hero-caption p.lead {
+    font-size: 0.95rem;
+    margin-bottom: 0.75rem;
+  }
+
+  /* ปุ่ม */
   .hero-caption .btn {
     width: 100%;
+    font-size: 0.95rem;
+    padding: 0.6rem 1rem;
+  }
+
+  .hero-caption .btn + .btn {
+    margin-top: 0.5rem;
   }
 }
+
 
 
 /* ANNOUNCEMENT MODAL */
