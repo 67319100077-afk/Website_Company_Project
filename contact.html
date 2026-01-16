@@ -46,54 +46,50 @@
         <div class="col-lg-6">
           <!-- Formspree: เปลี่ยน action ให้เป็น endpoint ของคุณ -->
          <!-- Netlify Forms example (put this in contact.html) -->
-          <form id="contactForm"
-                name="contact"
-                method="POST"
-                data-netlify="true"
-                netlify-honeypot="bot-field"
-                class="card p-4 shadow-sm">
+        <form id="contactForm"
+          name="contact"
+          method="POST"
+          action="https://formspree.io/f/mdaakvnn"
+          class="card p-4 shadow-sm">
 
-            <!-- required for Netlify to identify the form -->
-            <input type="hidden" name="form-name" value="contact">
+      <!-- Honeypot (กัน bot) -->
+      <p style="display:none">
+        <label>อย่าเติมช่องนี้: <input name="bot-field" /></label>
+      </p>
 
-            <!-- Honeypot (ซ่อนจากผู้ใช้ปกติ) -->
-            <p style="display:none">
-              <label>อย่าเติมช่องนี้: <input name="bot-field" /></label>
-            </p>
+      <div class="mb-3">
+        <label for="name" class="form-label">ชื่อผู้ติดต่อ</label>
+        <input type="text" class="form-control" id="name" name="name" required>
+      </div>
 
-            <div class="mb-3">
-              <label for="name" class="form-label">ชื่อผู้ติดต่อ</label>
-              <input type="text" class="form-control" id="name" name="name" required>
-            </div>
+      <div class="mb-3">
+        <label for="email" class="form-label">อีเมล</label>
+        <input type="email" class="form-control" id="email" name="email" required>
+      </div>
 
-            <div class="mb-3">
-              <label for="email" class="form-label">อีเมล</label>
-              <input type="email" class="form-control" id="email" name="email" required>
-            </div>
+      <div class="mb-3">
+        <label for="company" class="form-label">บริษัท / แบรนด์</label>
+        <input type="text" class="form-control" id="company" name="company">
+      </div>
 
-            <div class="mb-3">
-              <label for="company" class="form-label">บริษัท / แบรนด์</label>
-              <input type="text" class="form-control" id="company" name="company">
-            </div>
+      <div class="mb-3">
+        <label for="message" class="form-label">ข้อความ</label>
+        <textarea class="form-control" id="message" name="message" rows="6" required></textarea>
+      </div>
 
-            <div class="mb-3">
-              <label for="message" class="form-label">ข้อความ</label>
-              <textarea class="form-control" id="message" name="message" rows="6" required></textarea>
-            </div>
+      <!-- Redirect หลังส่งสำเร็จ (ถ้ามี) -->
+      <!-- <input type="hidden" name="_next" value="thank-you.html"> -->
 
-            <!-- ถ้าต้องการ redirect ไป thank-you page หลังส่ง -->
-            <!-- <input type="hidden" name="_next" value="/thank-you.html"> -->
+      <div class="d-flex justify-content-between align-items-center">
+        <div>
+          <button type="submit" class="btn btn-danger">ส่งข้อความ</button>
+          <button type="reset" class="btn btn-outline-secondary ms-2">รีเซ็ต</button>
+        </div>
+        <small class="text-muted">หรือส่งอีเมล: sales@examplefactory.com</small>
+      </div>
 
-            <div class="d-flex justify-content-between align-items-center">
-              <div>
-                <button type="submit" class="btn btn-danger">ส่งข้อความ</button>
-                <button type="reset" class="btn btn-outline-secondary ms-2">รีเซ็ต</button>
-              </div>
-              <small class="text-muted">หรือส่งอีเมล: sales@examplefactory.com</small>
-            </div>
-
-            <div id="formAlert" class="mt-3" style="display:none;"></div>
-          </form>
+      <div id="formAlert" class="mt-3" style="display:none;"></div>
+    </form>
         </div>
       </div>
     </div>
